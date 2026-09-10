@@ -22,7 +22,9 @@ requirements:
     - cargo-bundle-licenses
     - pkg-config
     - cmake
-    - if: osx and arm64
+    # Zed's .cargo/config.toml links aarch64-linux with lld, and the macOS
+    # arm64 binary is large enough to hit branch-island issues without it
+    - if: (linux and aarch64) or (osx and arm64)
       then:
         - lld
     - if: win
